@@ -11,11 +11,17 @@
  *     Thomas Mortimer - Updated client to MVC and added new design patterns
  ******************************************************************************/
 package lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
+
+import javax.swing.JFrame;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.AdminController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.SystemStateController;
@@ -60,6 +66,40 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	* When replacing, remember to reassign the correct methods to the button event methods and set the correct types for the tableviews
 	*/
 	
+	/** GROUP03 WAS ADDED THIS. START ZONE 
+	 * Reset Password button */
+	private int count = 0;
+	AdminCaptchaGUI adc = new AdminCaptchaGUI();
+	
+	@FXML
+	private Button bttnAdminResetPass;
+	
+	/** Reset Password button */
+	@FXML
+	private Button bttnSendPass;
+	
+	/** Captcha button */
+	@FXML
+	private Button bttnCaptcha;
+	
+	/** TextField for e-mail for sending here password */
+	@FXML
+	private TextField txtfldAdminForgetText;
+	
+	/** TextField for captcha entering */
+	@FXML
+	private TextField txtfldCaptcha;
+	
+	/** Pane for captcha-test window*/
+    @FXML
+    private BorderPane brdpnResetPass;
+    
+    /** Pane for captcha-test window*/
+    @FXML
+    private BorderPane brdpnCaptcha;
+    
+    /** GROUP03 WAS ADDED THIS. END ZONE
+	
     /** The pane containing the logon controls. */
 	@FXML
     private Pane pnAdminLogon;
@@ -100,6 +140,62 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     @FXML
     private Button bttnAdminLogoff;
 
+    /** GROUP3 WAS ADDED THIS. START ZONE Method that is executed by click the Reset Button  */
+    @FXML
+    void bttnAdminResetPass_OnClick(ActionEvent event) {
+    	
+    	resetPass();
+    }
+    
+    @FXML
+    void bttnSendPass_OnClick(ActionEvent event) {
+    	
+    	sendPass();
+    }
+    
+    @FXML
+    void bttnCaptcha_OnClick(ActionEvent event) throws ServerOfflineException, ServerNotBoundException {
+    	
+    	adc.setVisible(false);
+    	
+    	if (txtfldCaptcha.getText().equals(adc.getCaptchaString())) {
+    		
+    		brdpnCaptcha.setVisible(false);
+    		if (userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText()).getValue())
+    			logonShowPanes(true);
+    		else
+    			logonShowPanes(false);
+    	}
+    		
+    	else {
+    		
+    		txtfldCaptcha.setText("");
+    		adc = new AdminCaptchaGUI();
+    		adc.setVisible(true);
+    	}
+    	
+    }
+    
+    public void sendPass() {
+    	
+    	if (txtfldAdminForgetText.getText().length() > 0) {
+    		logonShowPanes(false);
+    		brdpnResetPass.setVisible(false);
+    		System.out.println("Your password is 7WXC1359");
+    	}
+    	else
+    		showWarningNoDataEntered();
+    	
+    }
+    
+    public void resetPass() {
+    	
+    	pnAdminLogon.setVisible(false);
+    	brdpnResetPass.setVisible(true);
+    }
+    
+    /** GROUP03 WAS ADDED THIS. END ZONE
+    
     /**
      * The button event that will show the controls for adding a coordinator
      *
@@ -286,17 +382,29 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@Override
 	public void logon() {
+		
+		count ++;
+		
 		if(txtfldAdminUserName.getText().length() > 0 && psswrdfldAdminPassword.getText().length() > 0){
 			try {
-				if (userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText()).getValue())
+				if (count > 3) {
+					
+					pnAdminLogon.setVisible(false);
+			    	brdpnCaptcha.setVisible(true);
+			    	adc.setVisible(true);
+				}
+				
+				else if (userController.oeLogin(txtfldAdminUserName.getText(), psswrdfldAdminPassword.getText()).getValue())
 					logonShowPanes(true);
+				
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);
 			}	
     	}
-    	else
+		else
     		showWarningNoDataEntered();
+		
 	}
 
 	/* (non-Javadoc)
@@ -304,6 +412,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@Override
 	public void logoff() {
+		count = 0;
 		try {
 			if (userController.oeLogout().getValue()){
 				logonShowPanes(false);
@@ -329,6 +438,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	public void initialize(URL location, ResourceBundle resources) {
 		systemstateController = new SystemStateController();
 		logonShowPanes(false);
+		brdpnResetPass.setVisible(false);
+		brdpnCaptcha.setVisible(false);
 		setUpTables();
 		
 	}

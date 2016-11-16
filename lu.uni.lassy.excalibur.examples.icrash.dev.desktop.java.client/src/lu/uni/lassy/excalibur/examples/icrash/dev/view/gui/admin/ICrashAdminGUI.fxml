@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin.ICrashAdminGUIController">
+<AnchorPane prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin.ICrashAdminGUIController">
    <children>
       <SplitPane dividerPositions="0.5149863760217984" orientation="VERTICAL" prefHeight="509.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -35,6 +35,11 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
+                              <Button fx:id="bttnAdminResetPass" defaultButton="true" mnemonicParsing="false" onAction="#bttnAdminResetPass_OnClick" text="Reset Pass" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </GridPane>
                      </children>
@@ -52,6 +57,34 @@
                                  </font>
                               </Button>
                               <Button id="bttnBottomAdminCoordinatorDeleteACoordinator" fx:id="bttnBottomAdminCoordinatorDeleteACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorDeleteACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Delete a coordinator" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+                  <BorderPane id="brdpnResetPass" fx:id="brdpnResetPass" prefHeight="232.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <top>
+                        <HBox prefHeight="53.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+                           <children>
+                          	  <TextField fx:id="txtfldAdminForgetText" prefHeight="25.0" prefWidth="200.0" promptText="E-mail for reset password" GridPane.columnSpan="1" GridPane.rowIndex="1"/>
+                              <Button id="bttnSendPass" fx:id="bttnSendPass" mnemonicParsing="false" onAction="#bttnSendPass_OnClick" prefHeight="50.0" prefWidth="100.0" text="Send a password" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" >
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+                  <BorderPane id="brdpnCaptcha" fx:id="brdpnCaptcha" prefHeight="232.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <top>
+                        <HBox prefHeight="53.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+                           <children>
+                          	  <TextField fx:id="txtfldCaptcha" prefHeight="25.0" prefWidth="200.0" promptText="Enter captcha here" GridPane.columnSpan="1" GridPane.rowIndex="1"/>
+                              <Button id="bttnCaptcha" fx:id="bttnCaptcha" mnemonicParsing="false" onAction="#bttnCaptcha_OnClick" prefHeight="50.0" prefWidth="100.0" text="Captcha'll be here" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" >
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
