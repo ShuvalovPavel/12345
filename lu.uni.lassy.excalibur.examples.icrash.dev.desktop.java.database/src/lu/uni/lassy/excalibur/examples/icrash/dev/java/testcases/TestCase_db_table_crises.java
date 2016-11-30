@@ -86,9 +86,14 @@ public class TestCase_db_table_crises {
 		//set up comment
 		DtComment aDtComment = new DtComment(new PtString("1 bicycle involved in an accident."));
 		
+		String aDtlastReportTimeCol = new String("no report defined, yet");
+		String aDtchangeStatusTimeCol = new String("1 comment");
+		String aDtcreateTimeCol = new String("1 comment");
 		
 		CtCrisis aCtCrisis = new CtCrisis();
-		aCtCrisis.init(aId, aType, aStatus,aDtGPSLocation,aInstant, aDtComment);
+		
+		
+		aCtCrisis.init(aId, aType, aStatus,aDtGPSLocation,aInstant, aDtComment, aDtlastReportTimeCol, aDtchangeStatusTimeCol, aDtcreateTimeCol);
 		
 		DbCrises.insertCrisis(aCtCrisis);
 		

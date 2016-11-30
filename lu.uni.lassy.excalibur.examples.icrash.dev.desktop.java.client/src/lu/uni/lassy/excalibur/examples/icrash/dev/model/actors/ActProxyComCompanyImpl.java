@@ -91,12 +91,12 @@ public class ActProxyComCompanyImpl extends UnicastRemoteObject implements
 	 */
 	synchronized public PtBoolean oeAlert(EtHumanKind aEtHumanKind,
 			DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
-			DtGPSLocation aDtGPSLocation, DtComment aDtComment)
+			DtGPSLocation aDtGPSLocation, DtComment aDtComment, String createTimeCol)
 			throws RemoteException, NotBoundException {
 
 		if (serverSideActor != null)
 			return serverSideActor.oeAlert(aEtHumanKind, aDtDate, aDtTime,
-					aDtPhoneNumber, aDtGPSLocation, aDtComment);
+					aDtPhoneNumber, aDtGPSLocation, aDtComment, createTimeCol);
 		else
 			return new PtBoolean(false);
 	}

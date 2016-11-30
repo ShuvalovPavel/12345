@@ -55,7 +55,15 @@ public class CtCrisis implements Serializable {
 	
 	/** The comment associated with the crisis. Often refered to as the report. */
 	public DtComment comment;
-
+	
+	public String createTimeCol;
+	public String changeStatusTimeCol;
+	public String lastReportTimeCol;
+	
+	
+	
+	
+	
 	/**
 	 * Initialises the crisis.
 	 *
@@ -69,7 +77,7 @@ public class CtCrisis implements Serializable {
 	 */
 	public PtBoolean init(DtCrisisID aId, EtCrisisType aType,
 			EtCrisisStatus aStatus, DtGPSLocation aLocation,
-			DtDateAndTime aInstant, DtComment aComment) {
+			DtDateAndTime aInstant, DtComment aComment, String alastReportTimeCol, String achangeStatusTimeCol, String acreateTimeCol) {
 
 		id = aId;
 		type = aType;
@@ -77,6 +85,9 @@ public class CtCrisis implements Serializable {
 		location = aLocation;
 		instant = aInstant;
 		comment = aComment;
+		createTimeCol=acreateTimeCol;
+		changeStatusTimeCol=achangeStatusTimeCol;
+		lastReportTimeCol=alastReportTimeCol;
 
 		return new PtBoolean(true);
 
@@ -196,8 +207,14 @@ public class CtCrisis implements Serializable {
 		CtCrisis aCtCrisis = (CtCrisis)obj;
 		if (!aCtCrisis.id.value.getValue().equals(this.id.value.getValue()))
 			return false;
-		if (!aCtCrisis.comment.value.getValue().equals(this.comment.value.getValue()))
-			return false;
+//		if (!aCtCrisis.comment.value.getValue().equals(this.comment.value.getValue()))
+//			return false;
+	//	if (!aCtCrisis.lastReportTimeCol.equals(this.lastReportTimeCol))
+	//		return false;
+//		if (!aCtCrisis.createTimeCol.equals(this.createTimeCol))
+//			return false;
+//		if (!aCtCrisis.changeStatusTimeCol.value.getValue().equals(this.changeStatusTimeCol.value.getValue()))
+//			return false;
 		if (!aCtCrisis.instant.toString().equals(this.instant.toString()))
 			return false;
 		if (aCtCrisis.location.latitude.value.getValue() != this.location.latitude.value.getValue())

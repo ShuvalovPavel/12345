@@ -640,9 +640,11 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtGPSLocation, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment)
 	 */
+
+	
 	public  synchronized PtBoolean oeAlert(EtHumanKind aEtHumanKind, DtDate aDtDate,
 			DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
-			DtGPSLocation aDtGPSLocation, DtComment aDtComment)
+			DtGPSLocation aDtGPSLocation, DtComment aDtComment,  String acreateTime)
 			throws RemoteException {
 		try{
 			//PreP1
@@ -661,7 +663,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			DtAlertID aId = new DtAlertID(new PtString(""
 					+ nextValueForAlertID_at_pre));
 			EtAlertStatus aStatus = EtAlertStatus.pending;
-			aCtAlert.init(aId, aStatus, aDtGPSLocation, aInstant, aDtComment);
+			aCtAlert.init(aId, aStatus, aDtGPSLocation, aInstant, aDtComment,  acreateTime);
 			//DB: insert alert in the database
 			DbAlerts.insertAlert(aCtAlert);
 	
@@ -689,8 +691,11 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				EtCrisisStatus acStatus = EtCrisisStatus.pending;
 				DtComment acComment = new DtComment(new PtString(
 						"no report defined, yet"));
+				String aclastReportTimeCol = new String("not report yet");
+				String achangeStatusTimeCol = new String("not change yet");
+				
 				aCtCrisis.init(acId, acType, acStatus, aDtGPSLocation, aInstant,
-						acComment);
+						acComment, aclastReportTimeCol, achangeStatusTimeCol, acreateTime);
 	
 				//DB: insert crisis in the database
 				DbCrises.insertCrisis(aCtCrisis);
@@ -758,7 +763,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeValidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
 	 */
 	//actCoordinator Actor
-	public PtBoolean oeValidateAlert(DtAlertID aDtAlertID)
+	public PtBoolean oeValidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime)
 			throws RemoteException {
 		try{
 			//PreP1
@@ -771,6 +776,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
 				//PostF1
 				theAlert.status = EtAlertStatus.valid;
+				theAlert.changeStatusTime=aDtchangeStatusTime;
 				DbAlerts.updateAlert(theAlert);
 				PtString aMessage = new PtString("The alert "
 						//+ "with ID '"
@@ -790,7 +796,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeInvalidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
 	 */
-	public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID)
+	public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime)
 			throws RemoteException {
 		try{
 			//PreP1
@@ -803,6 +809,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
 				//PostF1
 				theAlert.status = EtAlertStatus.invalid;
+				theAlert.changeStatusTime=aDtchangeStatusTime;
 				DbAlerts.updateAlert(theAlert);
 				PtString aMessage = new PtString("The alert "
 						//+ "with ID '"
@@ -852,7 +859,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeSetCrisisStatus(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus)
 	 */
 	public  synchronized PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID,
-			EtCrisisStatus aEtCrisisStatus) throws RemoteException {
+			EtCrisisStatus aEtCrisisStatus, String aEtchangeStatusTimeCol) throws RemoteException {
 		try{
 			//PreP1
 			isSystemStarted();
@@ -864,6 +871,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
 				//PostF1
 				theCrisis.status = aEtCrisisStatus;
+				theCrisis.changeStatusTimeCol=aEtchangeStatusTimeCol;
 				DbCrises.updateCrisis(theCrisis);
 				PtString aMessage = new PtString("The crisis status has been updated !");
 				theActCoordinator.ieMessage(aMessage);
@@ -880,7 +888,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeSetCrisisHandler(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
-	public synchronized  PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID)
+	public synchronized  PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID, String aDtchangeStatusTime)
 			throws RemoteException {
 		try{
 			//PreP1
@@ -907,6 +915,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	
 				//PostF1
 				theCrisis.status = EtCrisisStatus.handled;
+				theCrisis.changeStatusTimeCol=aDtchangeStatusTime;
 				DbCrises.updateCrisis(theCrisis);
 				
 				assCtCrisisCtCoordinator.put(theCrisis, theCtCoordinator);
@@ -956,7 +965,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeReportOnCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment)
 	 */
 	public  synchronized PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID,
-			DtComment aDtComment) {
+			DtComment aDtComment, String aDtlastReportTimeCol) {
 		try{
 			//PreP1
 			isSystemStarted();
@@ -968,6 +977,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
 				//PostF1
 				theCrisis.comment = aDtComment;
+				theCrisis.lastReportTimeCol=aDtlastReportTimeCol;
 				DbCrises.updateCrisis(theCrisis);
 				PtString aMessage = new PtString("The crisis comment has been updated !");
 				try {
@@ -1047,7 +1057,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeCloseCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
-	public  synchronized PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID) {
+	public  synchronized PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID, String aDtchangeStatusTime) {
 		try{
 			//PreP1
 			isSystemStarted();
@@ -1059,6 +1069,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				ActCoordinator theActCoordinator = (ActCoordinator) currentRequestingAuthenticatedActor;
 				//PostF1
 				theCrisis.status = EtCrisisStatus.closed;
+				theCrisis.changeStatusTimeCol = aDtchangeStatusTime;
 				DbCrises.updateCrisis(theCrisis);
 				//PostF2
 				assCtCrisisCtCoordinator.remove(theCrisis);
@@ -1360,4 +1371,8 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			return new PtBoolean(false);
 		}
 	}
+
+
+
+	
 }

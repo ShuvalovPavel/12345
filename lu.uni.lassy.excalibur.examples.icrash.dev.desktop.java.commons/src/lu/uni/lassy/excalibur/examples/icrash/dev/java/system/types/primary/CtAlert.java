@@ -41,6 +41,9 @@ public class CtAlert implements Serializable {
 	
 	/** The comment associated with the alert. */
 	public DtComment comment;
+	
+	public String createTime;
+	public String changeStatusTime;
 
 	/**
 	 * Initialises the alert.
@@ -53,13 +56,15 @@ public class CtAlert implements Serializable {
 	 * @return the success of the initialisation of the alert
 	 */
 	public PtBoolean init(DtAlertID aId, EtAlertStatus aStatus,
-			DtGPSLocation aLocation, DtDateAndTime aInstant, DtComment aComment) {
+			DtGPSLocation aLocation, DtDateAndTime aInstant, DtComment aComment, String acreateTime) {
 			
 		id = aId;
 		status = aStatus;
 		location = aLocation;
 		instant = aInstant;
 		comment = aComment;
+	//	createTime=acreateTime;
+	//	changeStatusTime=achangeStatusTime;
 		return new PtBoolean(true);
 	}
 

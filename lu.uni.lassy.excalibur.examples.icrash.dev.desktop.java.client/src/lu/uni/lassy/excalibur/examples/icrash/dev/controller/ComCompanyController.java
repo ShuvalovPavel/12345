@@ -14,6 +14,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.controller;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.Hashtable;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.InvalidHumanKindException;
@@ -122,7 +123,9 @@ public class ComCompanyController implements HasListeners{
 			ht.put(aEtHumanKind, aEtHumanKind.name());
 			ht.put(aDtPhoneNumber, aDtPhoneNumber.value.getValue());
 			ht.put(aDtComment, aDtComment.value.getValue());
-			return aActProxyComCompany.oeAlert(aEtHumanKind, aDtDate, aDtTime, aDtPhoneNumber, aDtGPSLocation, aDtComment);
+			Date lrtc = new Date();
+			String createTimeCol = lrtc.toString();
+			return aActProxyComCompany.oeAlert(aEtHumanKind, aDtDate, aDtTime, aDtPhoneNumber, aDtGPSLocation, aDtComment, createTimeCol);
 		} catch (RemoteException e) {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerOfflineException();

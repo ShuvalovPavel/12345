@@ -83,10 +83,11 @@ public class TestCase_db_table_alerts2 {
 		//**********************************************************
 		//set up comment
 		DtComment aDtComment = new DtComment(new PtString("13 cars involved in an accident."));
-		
+		String acreateTime = new String(".");
+		String achangeStatusTime = new String(".");
 		
 		CtAlert aCtAlert = new CtAlert();
-		aCtAlert.init(aId, aStatus,aDtGPSLocation,aInstant, aDtComment);
+		aCtAlert.init(aId, aStatus,aDtGPSLocation,aInstant, aDtComment, acreateTime);
 		
 		DbAlerts.insertAlert(aCtAlert);
 		

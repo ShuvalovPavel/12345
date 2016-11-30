@@ -188,9 +188,13 @@ public class DbCrises extends DbAbstract {
 					//crisis's comment  
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("comment")));
+					
+					String alastReportTimeCol = new String("no report defined, yet");
+					String achangeStatusTimeCol = new String("comment");
+					String acreateTimeCol = new String("comment");
 
 					aCtCrisis.init(aId, aType, aStatus, aDtGPSLocation,
-							aInstant, aDtComment);
+							aInstant, aDtComment, alastReportTimeCol, achangeStatusTimeCol, acreateTimeCol);
 
 				}
 
@@ -335,9 +339,14 @@ public class DbCrises extends DbAbstract {
 					//crisis' comment  
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("comment")));
-
+					
+					String alastReportTimeCol = new String("no report defined, yet");
+					String achangeStatusTimeCol = new String("crises.comment");
+					String acreateTimeCol = new String("crises.comment");
+					
+					
 					aCtCrisis.init(aId, aType, aStatus, aDtGPSLocation,
-							aInstant, aDtComment);
+							aInstant, aDtComment, alastReportTimeCol, achangeStatusTimeCol, acreateTimeCol);
 
 					//*************************************
 					aCtCoordinator = new CtCoordinator();
@@ -452,9 +461,14 @@ public class DbCrises extends DbAbstract {
 					//crisis' comment  
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("comment")));
+					
+					String aDtlastReportTimeCol = new String("no report defined, yet");
+					String aDtchangeStatusTimeCol = new String("comment");
+					String aDtcreateTimeCol = new String("comment");
+					
 
 					aCtCrisis.init(aId, aType, aStatus, aDtGPSLocation,
-							aInstant, aDtComment);
+							aInstant, aDtComment, aDtlastReportTimeCol, aDtchangeStatusTimeCol, aDtcreateTimeCol);
 
 					//add instance to the hash
 					cmpSystemCtCrisis.put(aCtCrisis.id.value.getValue(),

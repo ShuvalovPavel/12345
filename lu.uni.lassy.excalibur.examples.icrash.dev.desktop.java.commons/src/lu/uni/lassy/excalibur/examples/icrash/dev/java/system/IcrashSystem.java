@@ -228,31 +228,34 @@ public interface IcrashSystem extends Remote {
 	 * @param aDtPhoneNumber The phone number of the human reporting the accident
 	 * @param aDtGPSLocation The location of the accident
 	 * @param aDtComment The message sent by the user
+	 * @param createTimeCol 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
 	public PtBoolean oeAlert(EtHumanKind aEtHumanKind,DtDate aDtDate,
-				DtTime aDtTime,DtPhoneNumber aDtPhoneNumber,DtGPSLocation aDtGPSLocation,DtComment aDtComment) throws RemoteException; 
+				DtTime aDtTime,DtPhoneNumber aDtPhoneNumber,DtGPSLocation aDtGPSLocation,DtComment aDtComment, String createTimeCol) throws RemoteException; 
 
 	/**
 	 * Validates an alert on the system
 	 * Uses the coordinator actor to do this function.
 	 *
 	 * @param aDtAlertID The ID of the alert to validate
+	 * @param aDtchangeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeValidateAlert(DtAlertID aDtAlertID) throws RemoteException; 
+	public PtBoolean oeValidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime) throws RemoteException; 
 	
 	/**
 	 * Validates an alert on the system
 	 * Uses the coordinator actor to do this function.
 	 *
 	 * @param aDtAlertID The ID of the alert to invalidate
+	 * @param aDtchangeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID) throws RemoteException; 
+	public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime) throws RemoteException; 
 	
 	/**
 	 * Sets the crisis type to one passed.
@@ -269,29 +272,32 @@ public interface IcrashSystem extends Remote {
 	 *
 	 * @param aDtCrisisID The ID of the crisis to change
 	 * @param aEtCrisisStatus The status to change the crisis to
+	 * @param aDtlastReportTimeCol 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID, EtCrisisStatus aEtCrisisStatus) throws RemoteException; 		
+	public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID, EtCrisisStatus aEtCrisisStatus, String changeStatusTime) throws RemoteException; 		
 	
 	/**
 	 * Sets the current authenticating actor to be handling the crisis.
 	 *
 	 * @param aDtCrisisID The ID of the crisis to change
+	 * @param aDtchangeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID) throws RemoteException; 
+	public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID, String aDtchangeStatusTime) throws RemoteException; 
 	
 	/**
 	 * Sets the report on the crisis to be the one of the comment passed.
 	 *
 	 * @param aDtCrisisID The ID of the crisis to change
 	 * @param aDtComment The new report to set in the crisis
+	 * @param aDtlastReportTimeCol 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID, DtComment aDtComment) throws RemoteException; 
+	public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID, DtComment aDtComment, String aDtlastReportTimeCol) throws RemoteException; 
 	
 	/**
 	 * Gets the crisis with the status specified.
@@ -315,10 +321,11 @@ public interface IcrashSystem extends Remote {
 	 * Closes the crisis specified.
 	 *
 	 * @param aDtCrisisID The ID of the crisis to change
+	 * @param aDtchangeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID) throws RemoteException; 
+	public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID, String aDtchangeStatusTime) throws RemoteException; 
 	
 	
 	/**

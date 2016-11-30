@@ -88,12 +88,12 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator#oeSetCrisisHandler(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
-	synchronized public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID)
+	synchronized public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID, String aDtchangeStatusTime)
 			throws RemoteException, NotBoundException {
 
 		if (getServerSideActor() != null)
 			return ((ActCoordinator) getServerSideActor())
-					.oeSetCrisisHandler(aDtCrisisID);
+					.oeSetCrisisHandler(aDtCrisisID, aDtchangeStatusTime);
 		else
 			return new PtBoolean(false);
 	}
@@ -101,12 +101,12 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator#oeValidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
 	 */
-	synchronized public PtBoolean oeValidateAlert(DtAlertID aDtAlertID)
+	synchronized public PtBoolean oeValidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime)
 			throws RemoteException, NotBoundException {
 
 		if (getServerSideActor() != null)
 			return ((ActCoordinator) getServerSideActor())
-					.oeValidateAlert(aDtAlertID);
+					.oeValidateAlert(aDtAlertID, aDtchangeStatusTime);
 		else
 			return new PtBoolean(false);
 	}
@@ -114,12 +114,12 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator#oeInvalidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
 	 */
-	synchronized public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID)
+	synchronized public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime)
 			throws RemoteException, NotBoundException {
 
 		if (getServerSideActor() != null)
 			return ((ActCoordinator) getServerSideActor())
-					.oeInvalidateAlert(aDtAlertID);
+					.oeInvalidateAlert(aDtAlertID, aDtchangeStatusTime);
 		else
 			return new PtBoolean(false);
 	}
@@ -128,12 +128,12 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator#oeSetCrisisStatus(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus)
 	 */
 	synchronized public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID,
-			EtCrisisStatus aEtCrisisStatus) throws RemoteException,
+			EtCrisisStatus aEtCrisisStatus, String changeStatusTime) throws RemoteException,
 			NotBoundException {
 
 		if (getServerSideActor() != null)
 			return ((ActCoordinator) getServerSideActor()).oeSetCrisisStatus(
-					aDtCrisisID, aEtCrisisStatus);
+					aDtCrisisID, aEtCrisisStatus, changeStatusTime);
 		else
 			return new PtBoolean(false);
 	}
@@ -156,11 +156,11 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator#oeReportOnCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment)
 	 */
 	synchronized public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID,
-			DtComment aDtComment) throws RemoteException, NotBoundException {
+			DtComment aDtComment, String aDtlastReportTimeCol) throws RemoteException, NotBoundException {
 
 		if (getServerSideActor() != null)
 			return ((ActCoordinator) getServerSideActor()).oeReportOnCrisis(
-					aDtCrisisID, aDtComment);
+					aDtCrisisID, aDtComment, aDtlastReportTimeCol);
 		else
 			return new PtBoolean(false);
 	}
@@ -168,12 +168,12 @@ public class ActProxyCoordinatorImpl extends ActProxyAuthenticatedImpl
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyCoordinator#oeCloseCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
-	synchronized public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID)
+	synchronized public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID, String aDtchangeStatusTime)
 			throws RemoteException, NotBoundException {
 
 		if (getServerSideActor() != null)
 			return ((ActCoordinator) getServerSideActor())
-					.oeCloseCrisis(aDtCrisisID);
+					.oeCloseCrisis(aDtCrisisID, aDtchangeStatusTime);
 		else
 			return new PtBoolean(false);
 	}

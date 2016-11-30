@@ -49,13 +49,14 @@ public interface ActProxyComCompany extends Remote, JIntIsActor {
 	 * @param aDtPhoneNumber The phone number of the human associated with the accident
 	 * @param aDtGPSLocation The location of the accident
 	 * @param aDtComment The message sent by the human associated with the accident
+	 * @param createTimeCol 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server is not bound correctly in RMI settings
 	 */
 	public PtBoolean oeAlert(EtHumanKind aEtHumanKind,DtDate aDtDate,
 			DtTime aDtTime,DtPhoneNumber aDtPhoneNumber,
-			DtGPSLocation aDtGPSLocation,DtComment aDtComment) throws RemoteException, NotBoundException;
+			DtGPSLocation aDtGPSLocation,DtComment aDtComment, String createTimeCol) throws RemoteException, NotBoundException;
 
 	/**
 	 * Recieves a message from the server side actor with details of if the alert was logged or not.

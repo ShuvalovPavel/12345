@@ -60,27 +60,29 @@ public interface ActProxyCoordinator extends ActProxyAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID) throws RemoteException, NotBoundException;
+	public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID, String aDtchangeStatusTime) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Validates the alert with the same ID as the one passed.
 	 *
 	 * @param aDtAlertID The ID to use to find the alert to validate
+	 * @param aDtchangeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeValidateAlert(DtAlertID aDtAlertID) throws RemoteException, NotBoundException;
+	public PtBoolean oeValidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Invalidates the alert with the same ID as the one passed.
 	 *
 	 * @param aDtAlertID The ID to use to find the alert to invalidate
+	 * @param changeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID) throws RemoteException, NotBoundException;
+	public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Sets the crisis' status, with the ID passed, to the status passed.
@@ -91,7 +93,7 @@ public interface ActProxyCoordinator extends ActProxyAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID, EtCrisisStatus aEtCrisisStatus) throws RemoteException, NotBoundException;
+	public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID, EtCrisisStatus aEtCrisisStatus, String changeStatusTime) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Sets the crisis' type, with the ID passed, to the type passed.
@@ -113,17 +115,18 @@ public interface ActProxyCoordinator extends ActProxyAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID,DtComment aDtComment) throws RemoteException, NotBoundException;
+	public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID,DtComment aDtComment, String aDtlastReportTimeCol) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Sets the crisis' to be closed, with the ID passed.
 	 *
 	 * @param aDtCrisisID The ID of the crisis to change the status of
+	 * @param changeStatusTime 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID) throws RemoteException, NotBoundException;
+	public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID, String changeStatusTime) throws RemoteException, NotBoundException;
 
 	/**
 	 * A message and crisis is received by the user.

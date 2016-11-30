@@ -87,10 +87,11 @@ public class TestCase_db_table_alerts {
 		//**********************************************************
 		//set up comment
 		DtComment aDtComment = new DtComment(new PtString("13 cars involved in an accident."));
-		
+		String acreateTime = new String(".");
+		String achangeStatusTime = new String(".");
 		
 		CtAlert aCtAlert = new CtAlert();
-		aCtAlert.init(aId, aStatus,aDtGPSLocation,aInstant, aDtComment);
+		aCtAlert.init(aId, aStatus,aDtGPSLocation,aInstant, aDtComment, acreateTime);
 		
 		DbAlerts.insertAlert(aCtAlert);
 		
@@ -109,7 +110,11 @@ public class TestCase_db_table_alerts {
 		EtCrisisType acType = EtCrisisType.small;
 		EtCrisisStatus acStatus = EtCrisisStatus.pending;
 		DtComment acComment = new DtComment(new PtString("no report defined, yet"));
-		aCtCrisis.init(acId, acType, acStatus, aDtGPSLocation, aInstant, acComment);
+		String aclastReportTimeCol = new String("no report defined, yet");
+		String acchangeStatusTimeCol = new String("no comment");
+		String accreateTimeCol = new String("no comment");
+		
+		aCtCrisis.init(acId, acType, acStatus, aDtGPSLocation, aInstant, acComment, aclastReportTimeCol, acchangeStatusTimeCol, accreateTimeCol);
 		DbAlerts.bindAlertCrisis(aCtAlert2, aCtCrisis);
 
 

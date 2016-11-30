@@ -14,6 +14,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.controller;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.Hashtable;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
@@ -65,7 +66,10 @@ public class CoordinatorController extends AbstractUserController {
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeSetCrisisStatus(aDtCrisisID, status);
+				Date lrtc = new Date();
+				String changeStatusTime = lrtc.toString();
+			//	String lastReportTimeCol = new String("11.12.1312");
+				return actCoord.oeSetCrisisStatus(aDtCrisisID, status, changeStatusTime);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();
@@ -92,7 +96,9 @@ public class CoordinatorController extends AbstractUserController {
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeSetCrisisHandler(aDtCrisisID);
+				Date lrtc = new Date();
+				String changeStatusTime = lrtc.toString();
+				return actCoord.oeSetCrisisHandler(aDtCrisisID, changeStatusTime);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();
@@ -120,7 +126,9 @@ public class CoordinatorController extends AbstractUserController {
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeCloseCrisis(aDtCrisisID);
+				Date lrtc = new Date();
+				String changeStatusTime = lrtc.toString();
+				return actCoord.oeCloseCrisis(aDtCrisisID, changeStatusTime);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();
@@ -151,7 +159,9 @@ public class CoordinatorController extends AbstractUserController {
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeReportOnCrisis(aDtCrisisID, aDtComment);
+				Date lrtc = new Date();
+				String lastReportTimeCol = lrtc.toString();
+				return actCoord.oeReportOnCrisis(aDtCrisisID, aDtComment, lastReportTimeCol);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();
@@ -178,7 +188,9 @@ public class CoordinatorController extends AbstractUserController {
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeValidateAlert(aDtAlertID);
+				Date lrtc = new Date();
+				String changeStatusTime = lrtc.toString();
+				return actCoord.oeValidateAlert(aDtAlertID, changeStatusTime);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();
@@ -206,7 +218,9 @@ public class CoordinatorController extends AbstractUserController {
 		if (this.getUserType() == UserType.Coordinator){
 			ActProxyCoordinator actCoord = (ActProxyCoordinator)this.getAuth();
 			try {
-				return actCoord.oeInvalidateAlert(aDtAlertID);
+				Date lrtc = new Date();
+				String changeStatusTime = lrtc.toString();
+				return actCoord.oeInvalidateAlert(aDtAlertID, changeStatusTime);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();

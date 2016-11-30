@@ -210,9 +210,12 @@ public class DbAlerts extends DbAbstract {
 					//alert's comment  
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("comment")));
+					
+					String acreateTime = new String("comment");
+					String achangeStatusTime = new String("comment");
 
 					aCtAlert.init(aId, aStatus, aDtGPSLocation, aInstant,
-							aDtComment);
+							aDtComment, acreateTime);
 
 				}
 
@@ -341,10 +344,14 @@ public class DbAlerts extends DbAbstract {
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("comment")));
 
+					String acreateTime = new String("comment");
+					String achangeStatusTime = new String("comment");
+					
 					//init aCtAlert instance
 					aCtAlert.init(aId, aStatus, aDtGPSLocation, aInstant,
-							aDtComment);
+							aDtComment, acreateTime);
 
+					
 					//add instance to the hash
 					cmpSystemCtAlert
 					.put(aCtAlert.id.value.getValue(), aCtAlert);
@@ -437,9 +444,12 @@ public class DbAlerts extends DbAbstract {
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("alerts.comment")));
 
+					String acreateTime = new String("alerts.comment");
+					String achangeStatusTime = new String("alerts.comment");
+					
 					//init aCtAlert instance
 					aCtAlert.init(aId, aStatus, aDtGPSLocation, aInstant,
-							aDtComment);
+							aDtComment, acreateTime);
 
 					//*************************************
 					aCtCrisis = new CtCrisis();
@@ -495,10 +505,15 @@ public class DbAlerts extends DbAbstract {
 					//crisis's comment  
 					DtComment aCrisisDtComment = new DtComment(new PtString(
 							res.getString("crises.comment")));
+					
+					String alastReportTimeCol = new String("crises.report");
+					String achangeStatusTimeCol = new String("crises.comment");
+					String acreateTimeCol = new String("crises.comment");
+					
 
 					aCtCrisis.init(aCrisisId, aCrisisType, aCrisisStatus,
 							aCrisisDtGPSLocation, aCrisisInstant,
-							aCrisisDtComment);
+							aCrisisDtComment, alastReportTimeCol, achangeStatusTimeCol, acreateTimeCol);
 
 					//add instances to the hash
 					assCtAlertCtCrisis.put(aCtAlert, aCtCrisis);
@@ -591,9 +606,12 @@ public class DbAlerts extends DbAbstract {
 					DtComment aDtComment = new DtComment(new PtString(
 							res.getString("alerts.comment")));
 
+					String acreateTime = new String("alerts.comment");
+					String achangeStatusTime = new String("alerts.comment");
+					
 					//init aCtAlert instance
 					aCtAlert.init(aId, aStatus, aDtGPSLocation, aInstant,
-							aDtComment);
+							aDtComment, acreateTime);
 
 					//*************************************
 					aCtHuman = new CtHuman();

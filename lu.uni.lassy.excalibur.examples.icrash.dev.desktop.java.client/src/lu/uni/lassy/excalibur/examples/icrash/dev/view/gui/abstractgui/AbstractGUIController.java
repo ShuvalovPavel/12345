@@ -393,6 +393,8 @@ public abstract class AbstractGUIController implements Initializable {
 		TableColumn<CtAlert, Double> longitudeCol = new TableColumn<CtAlert, Double>("Longitude");
 		TableColumn<CtAlert, Double> latitudeCol = new TableColumn<CtAlert, Double>("Latitude");
 		TableColumn<CtAlert, String> commentCol = new TableColumn<CtAlert, String>("Comment");
+		TableColumn<CtAlert, String> createTimeCol = new TableColumn<CtAlert, String>("Create time");
+		TableColumn<CtAlert, String> changeStatusTimeCol = new TableColumn<CtAlert, String>("Last change status");
 		TableColumn<CtAlert, String> statusCol = new TableColumn<CtAlert, String>("Status");
 		idCol.setCellValueFactory(new Callback<CellDataFeatures<CtAlert, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(CellDataFeatures<CtAlert, String> alert) {
@@ -424,6 +426,18 @@ public abstract class AbstractGUIController implements Initializable {
 				return new ReadOnlyObjectWrapper<String>(alert.getValue().comment.value.getValue());
 			}
 		});
+		
+		createTimeCol.setCellValueFactory(new Callback<CellDataFeatures<CtAlert, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtAlert, String> alert) {
+				return new ReadOnlyObjectWrapper<String>(alert.getValue().createTime);
+			}
+		});
+		changeStatusTimeCol.setCellValueFactory(new Callback<CellDataFeatures<CtAlert, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtAlert, String> alert) {
+				return new ReadOnlyObjectWrapper<String>(alert.getValue().changeStatusTime);
+			}
+		});
+		
 		statusCol.setCellValueFactory(new Callback<CellDataFeatures<CtAlert, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(CellDataFeatures<CtAlert, String> alert) {
 				return new ReadOnlyObjectWrapper<String>(alert.getValue().status.name());
@@ -435,6 +449,8 @@ public abstract class AbstractGUIController implements Initializable {
 		tblvw.getColumns().add(longitudeCol);
 		tblvw.getColumns().add(latitudeCol);
 		tblvw.getColumns().add(commentCol);
+		tblvw.getColumns().add(createTimeCol);
+		tblvw.getColumns().add(changeStatusTimeCol);
 		tblvw.getColumns().add(statusCol);
 		setColumnsSameWidth(tblvw);
 	}
@@ -453,6 +469,9 @@ public abstract class AbstractGUIController implements Initializable {
 		TableColumn<CtCrisis, Double> latitudeCol = new TableColumn<CtCrisis, Double>("Latitude");
 		TableColumn<CtCrisis, String> commentCol = new TableColumn<CtCrisis, String>("Comment");
 		TableColumn<CtCrisis, String> statusCol = new TableColumn<CtCrisis, String>("Status");
+		TableColumn<CtCrisis, String> createTimeCol = new TableColumn<CtCrisis, String>("Create time");
+		TableColumn<CtCrisis, String> changeStatusTimeCol = new TableColumn<CtCrisis, String>("Last change status");
+		TableColumn<CtCrisis, String> lastReportTimeCol = new TableColumn<CtCrisis, String>("Last report");
 		idCol.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> alert) {
 				return new ReadOnlyObjectWrapper<String>(alert.getValue().id.value.getValue());
@@ -483,6 +502,24 @@ public abstract class AbstractGUIController implements Initializable {
 				return new ReadOnlyObjectWrapper<String>(crisis.getValue().comment.value.getValue());
 			}
 		});
+		createTimeCol.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> crisis) {
+				return new ReadOnlyObjectWrapper<String>(crisis.getValue().createTimeCol);
+			}
+		});
+		changeStatusTimeCol.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> crisis) {
+				return new ReadOnlyObjectWrapper<String>(crisis.getValue().changeStatusTimeCol);
+			}
+		});
+		lastReportTimeCol.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> crisis) {
+				return new ReadOnlyObjectWrapper<String>(crisis.getValue().lastReportTimeCol);
+			}
+		});
+		
+
+		
 		statusCol.setCellValueFactory(new Callback<CellDataFeatures<CtCrisis, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(CellDataFeatures<CtCrisis, String> crisis) {
 				return new ReadOnlyObjectWrapper<String>(crisis.getValue().status.name());
@@ -500,6 +537,9 @@ public abstract class AbstractGUIController implements Initializable {
 		tblvw.getColumns().add(longitudeCol);
 		tblvw.getColumns().add(latitudeCol);
 		tblvw.getColumns().add(commentCol);
+		tblvw.getColumns().add(createTimeCol);
+		tblvw.getColumns().add(changeStatusTimeCol);
+		tblvw.getColumns().add(lastReportTimeCol);
 		tblvw.getColumns().add(statusCol);
 		setColumnsSameWidth(tblvw);
 	}

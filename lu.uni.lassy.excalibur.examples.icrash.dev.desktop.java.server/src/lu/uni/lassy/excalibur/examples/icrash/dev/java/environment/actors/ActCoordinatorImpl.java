@@ -81,7 +81,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeSetCrisisHandler(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
-	synchronized public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeSetCrisisHandler(DtCrisisID aDtCrisisID, String aDtchangeStatusTime) throws RemoteException, NotBoundException {
 	
 		Logger log = Log4JUtils.getInstance().getLogger();
 	
@@ -94,7 +94,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeSetCrisisHandler sent to system");
-		PtBoolean res = iCrashSys_Server.oeSetCrisisHandler(aDtCrisisID);
+		PtBoolean res = iCrashSys_Server.oeSetCrisisHandler(aDtCrisisID, aDtchangeStatusTime);
 			
 			
 		if(res.getValue() == true)
@@ -107,7 +107,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeValidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
 	 */
-	synchronized public PtBoolean oeValidateAlert(DtAlertID aDtAlertID) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeValidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime) throws RemoteException, NotBoundException {
 	
 		Logger log = Log4JUtils.getInstance().getLogger();
 	
@@ -121,7 +121,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeValidateAlert sent to system");
-		PtBoolean res = iCrashSys_Server.oeValidateAlert(aDtAlertID);
+		PtBoolean res = iCrashSys_Server.oeValidateAlert(aDtAlertID, aDtchangeStatusTime);
 			
 			
 		if(res.getValue() == true)
@@ -134,7 +134,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeInvalidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
 	 */
-	synchronized public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeInvalidateAlert(DtAlertID aDtAlertID, String aDtchangeStatusTime) throws RemoteException, NotBoundException {
 
 		Logger log = Log4JUtils.getInstance().getLogger();
 
@@ -147,7 +147,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeInvalidateAlert sent to system");
-		PtBoolean res = iCrashSys_Server.oeInvalidateAlert(aDtAlertID);
+		PtBoolean res = iCrashSys_Server.oeInvalidateAlert(aDtAlertID, aDtchangeStatusTime);
 
 
 		if(res.getValue() == true)
@@ -160,7 +160,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeSetCrisisStatus(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus)
 	 */
-	synchronized public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID, EtCrisisStatus aEtCrisisStatus) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeSetCrisisStatus(DtCrisisID aDtCrisisID, EtCrisisStatus aEtCrisisStatus, String changeStatusTime) throws RemoteException, NotBoundException {
 	
 		Logger log = Log4JUtils.getInstance().getLogger();
 	
@@ -173,7 +173,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeSetCrisisStatus sent to system");
-		PtBoolean res = iCrashSys_Server.oeSetCrisisStatus(aDtCrisisID, aEtCrisisStatus);
+		PtBoolean res = iCrashSys_Server.oeSetCrisisStatus(aDtCrisisID, aEtCrisisStatus, changeStatusTime);
 			
 			
 		if(res.getValue() == true)
@@ -211,7 +211,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeReportOnCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment)
 	 */
-	synchronized public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID,DtComment aDtComment) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeReportOnCrisis(DtCrisisID aDtCrisisID,DtComment aDtComment, String aDtlastReportTimeCol) throws RemoteException, NotBoundException {
 	
 		Logger log = Log4JUtils.getInstance().getLogger();
 
@@ -227,7 +227,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeReportOnCrisis sent to system");
-		PtBoolean res = iCrashSys_Server.oeReportOnCrisis(aDtCrisisID, aDtComment);
+		PtBoolean res = iCrashSys_Server.oeReportOnCrisis(aDtCrisisID, aDtComment, aDtlastReportTimeCol);
 			
 			
 		if(res.getValue() == true)
@@ -241,7 +241,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActCoordinator#oeCloseCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
-	synchronized public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID) throws RemoteException, NotBoundException {
+	synchronized public PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID, String aDtchangeStatusTime) throws RemoteException, NotBoundException {
 	
 		Logger log = Log4JUtils.getInstance().getLogger();
 
@@ -257,7 +257,7 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActCoordinator.oeCloseCrisis sent to system");
-		PtBoolean res = iCrashSys_Server.oeCloseCrisis(aDtCrisisID);
+		PtBoolean res = iCrashSys_Server.oeCloseCrisis(aDtCrisisID, aDtchangeStatusTime);
 			
 			
 		if(res.getValue() == true)
